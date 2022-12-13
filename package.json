@@ -2,10 +2,9 @@
   "name": "file-manager",
   "version": "1.0.0",
   "description": "rs app task 2",
-  "main": "node src/app.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/app.js --username lol_kek_chebureck"
   },
   "repository": {
     "type": "git",
