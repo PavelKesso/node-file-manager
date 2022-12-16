@@ -1,11 +1,12 @@
 import path from 'path'
-import { Add, Cat, Cd, Ls, Up } from "../commands.js"
+import { Rn, Add, Cat, Cd, Ls, Up } from "../commands.js"
 import { UncnowkCommandError } from "../errors.js"
 import { executeUp } from './command/up.js'
 import { executeCd } from './command/cd.js'
 import { executeLs } from './command/ls.js'
 import { executeCat } from './command/cat.js'
 import { executeAdd } from './command/add.js'
+import { executeRn } from './command/rn.js'
 
 export class CommandExecutor {
     constructor(context) {
@@ -34,6 +35,11 @@ export class CommandExecutor {
             case Add:
                 const addFileName = parameters.path
                 commandResult = await executeAdd(this.context, addFileName)
+                break
+            case Rn:
+                const rnFrom = parameters.from
+                const rnTo = parameters.to
+                commandResult = await executeRn(this.context, rnFrom, rnTo)
                 break
             default:
                 throw new UncnowkCommandError(command.command)
