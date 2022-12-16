@@ -5,3 +5,10 @@ export class ParametersError extends Error {
         this.parameters = parameters
     }
 }
+
+export class UncnowkCommandError extends Error {
+    constructor(commandName) {
+        super(commandName)
+        this.commandName = commandName
+    }
+}

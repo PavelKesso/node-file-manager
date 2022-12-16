@@ -13,7 +13,6 @@ const app = () => {
         process.exit();
     })
 
-
     process.stdin
         .pipe(fileManager)
         .pipe(process.stdout)

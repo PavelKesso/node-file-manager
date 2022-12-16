@@ -1,4 +1,5 @@
 import { Transform } from 'node:stream'
+import { CommandExecutor } from './commandExecutor.js'
 import { parseCommand, parseParams } from './commands.js'
 
 class FileManager extends Transform {
@@ -6,19 +7,20 @@ class FileManager extends Transform {
         super()
         this.startArgumants = startArgumants
         this.context = context
+        this.executor = new CommandExecutor(context)
         console.log("Welcome to the File Manager, %s!", startArgumants.username);
         console.log(getCurrentDir(this.context))
     }
 
-    _transform(chunk, encoding, callback) {
-        const currentDir = getCurrentDir(this.context)
+    async _transform(chunk, encoding, callback) {
 
         const rawCommand = chunk.toString()
         const command = parseCommand(rawCommand)
         const commandParams = parseParams(command, rawCommand)
 
-        console.log(commandParams);
+        const answer = await this.executor.executeCommand(command, commandParams)
 
+        const currentDir = getCurrentDir(this.context)
         callback(null, currentDir + '\n')
     }
 }
