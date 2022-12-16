@@ -82,7 +82,6 @@ export const Rm = {
     ]
 }
 
-
 export const Os = {
     command: 'os',
     params: [
@@ -92,7 +91,16 @@ export const Os = {
     ]
 }
 
-export const commands = [Up, Cd, Ls, Cat, Add, Rn, Cp, Mv, Rm, Os]
+export const Hash = {
+    command: 'hash',
+    params: [
+        {
+            name: 'path'
+        },
+    ]
+}
+
+export const commands = [Up, Cd, Ls, Cat, Add, Rn, Cp, Mv, Rm, Os, Hash]
 
 export const parseCommand = (rawCommand) => {
     const commandName = rawCommand.trim().split(/\s+/)[0]

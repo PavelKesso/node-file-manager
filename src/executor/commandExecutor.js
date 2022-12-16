@@ -1,4 +1,4 @@
-import { Os, Rm, Mv, Cp, Rn, Add, Cat, Cd, Ls, Up } from "../commands.js"
+import { Hash, Os, Rm, Mv, Cp, Rn, Add, Cat, Cd, Ls, Up } from "../commands.js"
 import { UncnowkCommandError } from "../errors.js"
 import { executeUp } from './command/up.js'
 import { executeCd } from './command/cd.js'
@@ -10,6 +10,7 @@ import { executeCp } from "./command/cp.js"
 import { executeMv } from "./command/mv.js"
 import { executeRm } from "./command/rm.js"
 import { executeOs } from "./command/os.js"
+import { executeHash } from "./command/hash.js"
 
 export class CommandExecutor {
     constructor(context) {
@@ -61,6 +62,10 @@ export class CommandExecutor {
             case Os:
                 const osParameter = parameters.parameter
                 commandResult = executeOs(this.context, osParameter)
+                break
+            case Hash:
+                const hashPath = parameters.path
+                commandResult = executeHash(this.context, hashPath)
                 break
             default:
                 throw new UncnowkCommandError(command.command)
