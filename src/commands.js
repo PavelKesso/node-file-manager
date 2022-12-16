@@ -19,7 +19,16 @@ export const Ls = {
     params: []
 }
 
-export const commands = [Up, Cd, Ls]
+export const Cat = {
+    command: 'cat',
+    params: [
+        {
+            name: 'path'
+        },
+    ]
+}
+
+export const commands = [Up, Cd, Ls, Cat]
 
 export const parseCommand = (rawCommand) => {
     const commandName = rawCommand.trim().split(/\s+/)[0]

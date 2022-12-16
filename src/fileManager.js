@@ -1,5 +1,5 @@
 import { Transform } from 'node:stream'
-import { CommandExecutor } from './commandExecutor.js'
+import { CommandExecutor } from './executor/commandExecutor.js'
 import { parseCommand, parseParams } from './commands.js'
 
 class FileManager extends Transform {
@@ -21,7 +21,7 @@ class FileManager extends Transform {
         const answer = await this.executor.executeCommand(command, commandParams)
 
         const currentDir = getCurrentDir(this.context)
-        callback(null, currentDir + '\n')
+        callback(null, answer.answer + currentDir + '\n')
     }
 }
 
