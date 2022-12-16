@@ -1,4 +1,5 @@
-import { Hash, Os, Rm, Mv, Cp, Rn, Add, Cat, Cd, Ls, Up } from "../commands.js"
+import { Compress, Decompress, Hash, Os, Rm, Mv, Cp, Rn, Add, Cat, Cd, Ls, Up }
+    from "../commands.js"
 import { UncnowkCommandError } from "../errors.js"
 import { executeUp } from './command/up.js'
 import { executeCd } from './command/cd.js'
@@ -11,6 +12,8 @@ import { executeMv } from "./command/mv.js"
 import { executeRm } from "./command/rm.js"
 import { executeOs } from "./command/os.js"
 import { executeHash } from "./command/hash.js"
+import { executeCompress } from "./command/compress.js"
+import { executeDecompress } from "./command/decompress.js"
 
 export class CommandExecutor {
     constructor(context) {
@@ -45,12 +48,12 @@ export class CommandExecutor {
                 const rnTo = parameters.to
                 commandResult = await executeRn(this.context, rnFrom, rnTo)
                 break
-            case Cp: 
+            case Cp:
                 const cpFrom = parameters.from
                 const cpTo = parameters.to
                 commandResult = await executeCp(this.context, cpFrom, cpTo)
                 break
-            case Mv: 
+            case Mv:
                 const mvFrom = parameters.from
                 const mvTo = parameters.to
                 commandResult = await executeMv(this.context, mvFrom, mvTo)
@@ -66,6 +69,16 @@ export class CommandExecutor {
             case Hash:
                 const hashPath = parameters.path
                 commandResult = executeHash(this.context, hashPath)
+                break
+            case Compress:
+                const cFrom = parameters.from
+                const cTo = parameters.to
+                commandResult = executeCompress(this.context, cFrom, cTo)
+                break
+            case Decompress:
+                const dcFrom = parameters.from
+                const dcTo = parameters.to
+                commandResult = executeDecompress(this.context, dcFrom, dcTo)
                 break
             default:
                 throw new UncnowkCommandError(command.command)

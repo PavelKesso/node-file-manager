@@ -100,7 +100,32 @@ export const Hash = {
     ]
 }
 
-export const commands = [Up, Cd, Ls, Cat, Add, Rn, Cp, Mv, Rm, Os, Hash]
+export const Compress = {
+    command: 'compress',
+    params: [
+        {
+            name: 'from'
+        },
+        {
+            name: 'to'
+        },
+    ]
+}
+
+export const Decompress = {
+    command: 'decompress',
+    params: [
+        {
+            name: 'from'
+        },
+        {
+            name: 'to'
+        },
+    ]
+}
+
+const commands = [Up, Cd, Ls, Cat, Add, Rn, Cp, Mv, Rm, Os, Hash, Compress, 
+    Decompress]
 
 export const parseCommand = (rawCommand) => {
     const commandName = rawCommand.trim().split(/\s+/)[0]
@@ -115,7 +140,7 @@ export const parseCommand = (rawCommand) => {
 export const parseParams = (command, rawCommand) => {
     const rawParamsRegExp =
         new RegExp('\\s*' + command.command + '\\s*(.*)')
-    const nextParamRegExp = 
+    const nextParamRegExp =
         new RegExp('\\s*(\".*?\"|\'.*?\'|\\S*)\\s*(.*)')
 
     const rawParams = rawParamsRegExp.exec(rawCommand)[1]
@@ -124,12 +149,12 @@ export const parseParams = (command, rawCommand) => {
 
     if (params.length != command.params.length) {
         throw new ParametersError(command, params)
-    } 
+    }
 
     const answer = {}
     command.params.forEach((element, index) => {
         answer[element.name] = params[index]
     })
-    
+
     return answer
 }
