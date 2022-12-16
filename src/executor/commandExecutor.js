@@ -1,5 +1,4 @@
-import path from 'path'
-import { Rn, Add, Cat, Cd, Ls, Up } from "../commands.js"
+import { Cp, Rn, Add, Cat, Cd, Ls, Up } from "../commands.js"
 import { UncnowkCommandError } from "../errors.js"
 import { executeUp } from './command/up.js'
 import { executeCd } from './command/cd.js'
@@ -7,6 +6,7 @@ import { executeLs } from './command/ls.js'
 import { executeCat } from './command/cat.js'
 import { executeAdd } from './command/add.js'
 import { executeRn } from './command/rn.js'
+import { executeCp } from "./command/cp.js"
 
 export class CommandExecutor {
     constructor(context) {
@@ -40,6 +40,11 @@ export class CommandExecutor {
                 const rnFrom = parameters.from
                 const rnTo = parameters.to
                 commandResult = await executeRn(this.context, rnFrom, rnTo)
+                break
+            case Cp: 
+                const cpFrom = parameters.from
+                const cpTo = parameters.to
+                commandResult = await executeCp(this.context, cpFrom, cpTo)
                 break
             default:
                 throw new UncnowkCommandError(command.command)

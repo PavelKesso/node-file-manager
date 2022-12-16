@@ -49,8 +49,22 @@ export const Rn = {
     ]
 }
 
+export const Cp = {
+    command: 'cp',
+    params: [
+        {
+            name: 'from'
+        },
+        {
+            name: 'to'
+        },
+    ]
+}
 
-export const commands = [Up, Cd, Ls, Cat, Add, Rn]
+
+
+
+export const commands = [Up, Cd, Ls, Cat, Add, Rn, Cp]
 
 export const parseCommand = (rawCommand) => {
     const commandName = rawCommand.trim().split(/\s+/)[0]

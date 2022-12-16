@@ -1,5 +1,5 @@
-import { parsePath } from "../../file/parsePath.js";
-import { success, error } from "../result.js";
+import { parsePath } from "../../file/parsePath.js"
+import { success, error } from "../result.js"
 import { rename } from 'fs/promises'
 
 export async function executeRn(context, from, to) {

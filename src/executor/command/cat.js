@@ -1,6 +1,6 @@
-import { success, error } from "../result.js";
+import { success, error } from "../result.js"
 import { readFile } from 'fs/promises'
-import { parsePath } from '../../file/parsePath.js';
+import { parsePath } from '../../file/parsePath.js'
 
 export async function executeCat(context, fileName) {
     const fileToRead = parsePath(context, fileName)
