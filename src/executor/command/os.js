@@ -19,8 +19,9 @@ export function executeOs(context, parameter) {
             answer = context.architecture
             break
         default:
-            return error('unknown parameter')
+            return error('os: ' + parameter + ':  Uncknown parameter')
             break
     }
-    return success(answer + '\n')
+
+    return success(answer)
 }

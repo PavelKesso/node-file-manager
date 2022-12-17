@@ -7,8 +7,8 @@ export async function executeCat(context, fileName) {
 
     try {
         const content = await readFile(fileToRead, { encoding: 'utf-8' })
-        return success(content + '\n')
+        return success(content)
     } catch {
-        return error('no such file: ' + fileName)
+        return error('cat: ' + fileName + ': no such file or directory')
     }
 }

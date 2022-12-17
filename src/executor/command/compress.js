@@ -9,10 +9,10 @@ export async function executeCompress(context, from, to) {
     const toFile = parsePath(context, to)
 
     if (!await isFileExist(fromFile)) {
-        return error('decompress error: no such file: ' + from)
+        return error('compress: ' + from + ': No such file or directory')
     }
     if (await isFileExist(toFile)) {
-        return error('decompress error: destination path are exist: ' + to)
+        return error('compress: ' + to + ': File already exist')
     }
     
     const brodliZip = createBrodliZip()
@@ -21,5 +21,5 @@ export async function executeCompress(context, from, to) {
 
     readSteam.pipe(brodliZip).pipe(writeStream)
 
-    return success('')
+    return success()
 }

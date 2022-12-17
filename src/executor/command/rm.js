@@ -7,8 +7,8 @@ export async function executeRm(context, fileName) {
 
     try {
         await rm(fileToRemove)
-        return success('')
+        return success()
     } catch {
-        return error('')
+        return error('rm: ' + fileName + ': No such file or directory')
     }
 }

@@ -7,8 +7,8 @@ export async function executeAdd(context, fileName) {
 
     try {
         await writeFile(fileToCreate, '', { flag: 'wx' })
-        return success('')
+        return success()
     } catch {
-        return error('error during file creation: ' + fileName)
+        return error('add: ' + fileName + ': error during file creation')
     }
 }

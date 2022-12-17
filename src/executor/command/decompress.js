@@ -9,10 +9,10 @@ export async function executeDecompress(context, from, to) {
     const toFile = parsePath(context, to)
 
     if (!await isFileExist(fromFile)) {
-        return error('decompress error: no such file: ' + from)
+        return error('decompress: ' + from + ': No such file or directory')
     }
     if (await isFileExist(toFile)) {
-        return error('decompress error: destination path are exist: ' + to)
+        return error('decompress: ' + to + ': File already exist')
     }
 
     const brodliUnzip = createBrodliUnzip()
@@ -21,5 +21,5 @@ export async function executeDecompress(context, from, to) {
 
     readSteam.pipe(brodliUnzip).pipe(writeStream)
 
-    return success('')
+    return success()
 }

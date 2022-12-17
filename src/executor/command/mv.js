@@ -9,14 +9,14 @@ export async function executeMv(context, from, to) {
     const toFile = parsePath(context, to)
 
     if (!await isFileExist(fromFile)) {
-        return error('move error: no such file: ' + from)
+        return error('mv: ' + from + ':  No such file or directory')
     }
     if (!await isFileExist(toFile)) {
-        return error('move error: destination path are not exist: ' + to)
+        return error('mv: ' + to + ':  no such file or directory')
     }
     const stat = await lstat(toFile)
     if (!stat.isDirectory) {
-        return error('move error: destination should be a folder')
+        return error('mv: ' + to + ':  Is not folder')
     }
 
     const readStream = createReadStream(fromFile)
@@ -26,5 +26,5 @@ export async function executeMv(context, from, to) {
         await rm(fromFile)
     })
 
-    return success('')
+    return success()
 }

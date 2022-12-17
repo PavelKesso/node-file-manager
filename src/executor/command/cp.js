@@ -12,8 +12,8 @@ export async function executeCp(context, from, to) {
             toFile,
             { recursive: true, errorOnExist: true, force: false }
         )
-        return success('')
+        return success()
     } catch {
-        return error('copy error from: ' + from + ' to:' + to)
+        return error('cp: error during file copying')
     }
 }

@@ -21,8 +21,11 @@ export async function executeLs(context) {
     })
 
     const table = await Promise.all(tablePromises)
-
-    logger.table(table)
-    const tableStrng = (ts.read() || '').toString()
-    return success(tableStrng)
+    if (table.length == 0) {
+        return success()
+    } else {
+        logger.table(table)
+        const tableStrng = (ts.read() || '').toString()
+        return success(tableStrng)
+    }
 }

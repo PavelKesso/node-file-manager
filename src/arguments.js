@@ -5,8 +5,15 @@ export const parseArgs = () => {
         const arg = process.argv[index]
 
         if (arg.startsWith('--')) {
-            startArgumants[arg.slice(2)] = process.argv[parseInt(index) + 1]
+            const split = arg.split('=')
+            if (split.length == 2) {
+                startArgumants[split[0].slice(2)] = split[1]
+            }
         }
+    }
+
+    if (startArgumants.username == undefined) {
+        startArgumants.username = 'rickroll'
     }
 
     return startArgumants

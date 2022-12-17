@@ -8,8 +8,8 @@ export async function executeCd(context, destenation) {
 
     if (await isFileExist(pathToCd)) {
         context.dir = pathToCd
-        return success('')
+        return success()
     } else {
-        return error('no such dir: ' + destenation)
+        return error('cd: ' + destenation + ': No such file or directory')
     }
 }

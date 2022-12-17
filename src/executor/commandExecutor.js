@@ -1,5 +1,6 @@
-import { Compress, Decompress, Hash, Os, Rm, Mv, Cp, Rn, Add, Cat, Cd, Ls, Up }
-    from "../commands.js"
+import {
+    Exit, Compress, Decompress, Hash, Os, Rm, Mv, Cp, Rn, Add, Cat, Cd, Ls, Up
+} from "../commands.js"
 import { UncnowkCommandError } from "../errors.js"
 import { executeUp } from './command/up.js'
 import { executeCd } from './command/cd.js'
@@ -14,6 +15,7 @@ import { executeOs } from "./command/os.js"
 import { executeHash } from "./command/hash.js"
 import { executeCompress } from "./command/compress.js"
 import { executeDecompress } from "./command/decompress.js"
+import { exit } from "./result.js"
 
 export class CommandExecutor {
     constructor(context) {
@@ -79,6 +81,9 @@ export class CommandExecutor {
                 const dcFrom = parameters.from
                 const dcTo = parameters.to
                 commandResult = executeDecompress(this.context, dcFrom, dcTo)
+                break
+            case Exit:
+                commandResult = exit()
                 break
             default:
                 throw new UncnowkCommandError(command.command)

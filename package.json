@@ -4,7 +4,7 @@
   "description": "rs app task 2",
   "type": "module",
   "scripts": {
-    "start": "node src/app.js --username lol_kek_chebureck"
+    "start": "node src/app.js"
   },
   "repository": {
     "type": "git",

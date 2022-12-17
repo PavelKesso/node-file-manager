@@ -1,4 +1,4 @@
-import { ParametersError } from "./errors.js"
+import { ParametersError, UncnowkCommandError } from "./errors.js"
 
 export const Up = {
     command: "up",
@@ -124,17 +124,30 @@ export const Decompress = {
     ]
 }
 
-const commands = [Up, Cd, Ls, Cat, Add, Rn, Cp, Mv, Rm, Os, Hash, Compress, 
-    Decompress]
+export const Exit = {
+    command: '.exit',
+    params: []
+}
+
+const commands = [Up, Cd, Ls, Cat, Add, Rn, Cp, Mv, Rm, Os, Hash, Compress,
+    Decompress, Exit]
 
 export const parseCommand = (rawCommand) => {
-    const commandName = rawCommand.trim().split(/\s+/)[0]
+    try {
+        const commandName = rawCommand.trim().split(/\s+/)[0]
 
-    const command = commands.find(element =>
-        element.command == commandName
-    )
+        const command = commands.find(element =>
+            element.command == commandName
+        )
 
-    return command
+        if (command == undefined) {
+            throw new UncnowkCommandError(rawCommand)
+        }
+
+        return command
+    } catch {
+        throw new UncnowkCommandError(rawCommand)
+    }
 }
 
 export const parseParams = (command, rawCommand) => {

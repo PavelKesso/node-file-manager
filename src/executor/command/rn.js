@@ -8,9 +8,8 @@ export async function executeRn(context, from, to) {
 
     try {
         await rename(fromFile, toFile)
-        return success('')
+        return success()
     } catch {
-        return error('copy error from: ' + from + ' to: ' + to)
+        return error('rn: error during file renaming')
     }
-
 }

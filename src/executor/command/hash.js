@@ -9,8 +9,8 @@ export async function executeHash(context, fileName) {
     try {
         const content = await readFile(fileToHash)
         const hashSum = createHash('sha256')
-        return success(hashSum.digest('hex') + '\n')
+        return success(hashSum.digest('hex'))
     } catch {
-        return error('error during calculating hash: ' + fileName)
+        return error('hash: ' + fileName + ': No such file or directory')
     }
 }
