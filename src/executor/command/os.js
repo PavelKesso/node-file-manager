@@ -2,9 +2,19 @@ import { success, error } from "../result.js";
 
 export function executeOs(context, parameter) {
     var answer = ''
-    switch(parameter) {
+    switch (parameter) {
         case '--EOL':
-            answer = context.eol
+            switch (context.eol) {
+                case '\n':
+                    answer = '\\n'
+                    break
+                case '\n\r':
+                    answer = '\\n\\r'
+                    break
+                default:
+                    answer = 'https://www.youtube.com/watch?v=eBGIQ7ZuuiU'
+                    break
+            }
             break
         case '--cpus':
             answer = context.cpuCount
