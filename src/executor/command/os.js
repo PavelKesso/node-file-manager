@@ -1,4 +1,8 @@
-import { success, error } from "../result.js";
+import { success, error } from "../result.js"
+import { cpus } from 'node:os'
+import { Transform } from 'stream'
+import { Console } from 'console'
+import { inspect } from 'util'
 
 export function executeOs(context, parameter) {
     var answer = ''
@@ -17,7 +21,9 @@ export function executeOs(context, parameter) {
             }
             break
         case '--cpus':
-            answer = context.cpuCount
+            let total = 'Total: ' + context.cpuCount + '\n'
+            const table = getCpuTable()
+            answer = total + table
             break
         case '--homedir':
             answer = context.home
@@ -34,4 +40,22 @@ export function executeOs(context, parameter) {
     }
 
     return success(answer)
+}
+
+function getCpuTable() {
+    const ts = new Transform({ transform(chunk, enc, cb) { cb(null, chunk) } })
+    const logger = new Console({ stdout: ts })
+
+    const cpuList = cpus().map(cpu => {
+        const clockRate =
+            (Math.round((cpu.speed * 0.001 + Number.EPSILON) * 1000) / 1000)
+            + ' GHz'
+        return {
+            'Model': cpu.model,
+            'Clock Rate': clockRate
+        }
+    })
+
+    logger.table(cpuList)
+    return (ts.read() || '').toString()
 }
