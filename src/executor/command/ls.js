@@ -18,6 +18,12 @@ export async function executeLs(context) {
                     Type: type
                 }
             })
+			.catch(e => {
+				return {
+                    Name: file,
+                    Type: 'unknown'
+                }
+			})
     })
 
     const table = await Promise.all(tablePromises)

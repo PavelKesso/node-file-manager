@@ -12,8 +12,8 @@ export function executeOs(context, parameter) {
                 case '\n':
                     answer = '\\n'
                     break
-                case '\n\r':
-                    answer = '\\n\\r'
+                case '\r\n':
+                    answer = '\\r\\n'
                     break
                 default:
                     answer = 'https://www.youtube.com/watch?v=eBGIQ7ZuuiU'
